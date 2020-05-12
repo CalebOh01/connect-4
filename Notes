@@ -1,0 +1,5 @@
+<div :class="{'cell': isActive,'redcell': redIsActive, 'yellowcell': yellowIsActive }">
+    </div>
+
+
+s <compcell v-for="cell in line"  :key="board[line][cell]" :state="board[line][cell]"></compcell>
