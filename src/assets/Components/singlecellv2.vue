@@ -1,34 +1,37 @@
 <template>
-  <div class="cell" :class="{redcell: redActive, yellowcell: yellowActive}"></div>
+  <div class="cell" :class="{redcell: redActive, yellowcell: yellowActive}" @click="myPlay()"></div>
 </template>
 
 <script>
 export default {
-    data(){
-        return {
-            redActive: false,
-            yellowActive: false
-        }
-    },
-    props: {
-        value: String
-    },
-    methods: {
-    myPlay(x,y) {
-      if (this.$player1turn.value == true) {
+  data() {
+    return {
+      isClicked: false,
+      redActive: false,
+      yellowActive: false,
+    };
+  },
+  props: {
+    value: String
+  },
+  methods: {
+    myPlay() {
+      if (this.$player1turn.value == true && this.isClicked == false) {
         this.redActive = true;
-        this.yellowActive = false
-        this.$player1turn.value = !this.$player1turn.value
+        this.yellowActive = false;
+        this.isClicked = true;
+        this.$player1turn.value = !this.$player1turn.value;
         console.log("red");
-      } else {
+      } else if (this.$player1turn.value == false && this.isClicked == false){
         this.yellowActive = true;
-        this.redActive = false
-        this.$player1turn.value = !this.$player1turn.value
+        this.redActive = false;
+        this.isClicked = true;
+        this.$player1turn.value = !this.$player1turn.value;
         console.log("yellow");
       }
     }
-    }
-}
+  }
+};
 </script>
 
 <style>
