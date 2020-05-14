@@ -50,52 +50,7 @@ export default {
       }
     },
     checkDiagWin() {
-      let streak = 0;
-      let streak_value = "yellow";
-      for (let i = 0; i < 7; i++) {
-        if (this.$board[this.value.x - 3 + i][this.value.y - 3 + i] == null) {
-          return;
-        } else if (
-          this.$board[this.value.x - 3 + i][this.value.y - 3 + i] ==
-          this.streak_value
-        ) {
-          this.streak++;
-          if (this.streak == 4) {
-            console.log("win");
-            this.$winState.state = true;
-            break;
-          }
-        } else {
-          this.streak = 1;
-          if (this.$board[this.value.x - 3 + i][this.value.y - 3 + i] != "") {
-            this.streak_value = this.$board[this.value.x - 3 + i][
-              this.value.y - 3 + i
-            ];
-          }
-        }
-      }
       
-      for (let i = 0; i < 7; i++) {
-        if (this.$board[this.value.x + 3 + i][this.value.y + 3 + i] == null) {
-          return;
-        } else if (
-          this.$board[this.value.x + 3 + i][this.value.y + 3 + i] ==
-          this.streak_value
-        ) {
-          this.streak++;
-          if (this.streak == 4) {
-            console.log("win");
-            this.$winState.state = true;
-            break;
-          }
-        } else {
-          this.streak = 1;
-          if (this.$board[this.value.x + 3 + i][this.value.y + 3 + i] != "") {
-            this.streak_value = this.$board[this.value.x + 3 + i][this.value.y + 3 + i];
-          }
-        }
-      }
-
     },
     myPlay() {
       if (
@@ -110,6 +65,7 @@ export default {
         this.$board[this.value.x][this.value.y] = "red";
         this.checkVertWin();
         this.checkHorWin();
+        this.checkDiagWin()
       } else if (
         this.$player1turn.value == false &&
         this.$board[this.value.x][this.value.y] == "" &&
@@ -122,6 +78,7 @@ export default {
         this.$board[this.value.x][this.value.y] = "yellow";
         this.checkVertWin();
         this.checkHorWin();
+        this.checkDiagWin()
       } else if (
         this.$player1turn == true &&
         this.value.y == 5 &&
@@ -134,6 +91,7 @@ export default {
         this.$board[this.value.x][this.value.y] = "red";
         this.checkVertWin();
         this.checkHorWin();
+        this.checkDiagWin()
       } else if (
         this.$player1turn == false &&
         this.value.y == 5 &&
@@ -146,6 +104,7 @@ export default {
         this.$board[this.value.x][this.value.y] = "yellow";
         this.checkVertWin();
         this.checkHorWin();
+        this.checkDiagWin()
       }
     }
   }
