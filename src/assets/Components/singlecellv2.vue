@@ -1,5 +1,5 @@
 <template>
-  <div class="cell" :class="{redcell: redActive, yellowcell: yellowActive}" @click="myPlay(i,j)"></div>
+  <div class="cell" :class="{redcell: redActive, yellowcell: yellowActive}"></div>
 </template>
 
 <script>
