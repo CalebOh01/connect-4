@@ -16,8 +16,27 @@ export default {
   methods: {
     checkVertWin(){
       if(this.value.y <= 2 && this.$board[this.value.x][this.value.y] == this.$board[this.value.x][this.value.y + 1] && this.$board[this.value.x][this.value.y] == this.$board[this.value.x][this.value.y + 2] && this.$board[this.value.x][this.value.y] == this.$board[this.value.x][this.value.y + 3]){
-        this.$winState.value = true
+        this.$winState.state = true
         console.log('win')
+      }
+    },
+    checkHorWin(){
+      let streak = 0
+      let streak_value = 'yellow'
+      for(let i = 0; i<7; i++){
+        if(this.$board[i][this.value.y] == this.streak_value){
+          this.streak++
+          if(this.streak == 4){
+            console.log('win')
+            this.$winState.state = true
+            break
+          }
+        } else {
+          this.streak = 1
+          if(this.$board[i][this.value.y] != ''){
+          this.streak_value = this.$board[i][this.value.y]
+          }
+        }
       }
     },
     myPlay() {
@@ -28,6 +47,7 @@ export default {
         console.log("red");
         this.$board[this.value.x][this.value.y] = 'red'
         this.checkVertWin()
+        this.checkHorWin()
       } else if (this.$player1turn.value == false && this.$board[this.value.x][this.value.y] == '' && this.$board[this.value.x][(this.value.y)+1] != ''){
         this.yellowActive = true;
         this.redActive = false;
@@ -35,6 +55,7 @@ export default {
         console.log("yellow");
         this.$board[this.value.x][this.value.y] = 'yellow'
         this.checkVertWin()
+        this.checkHorWin()
       } else if (this.$player1turn == true && this.value.y == 5 && this.$board[this.value.x][this.value.y]== '') {
         this.redActive = true;
         this.yellowActive = false;
@@ -42,6 +63,7 @@ export default {
         console.log("red");
         this.$board[this.value.x][this.value.y] = 'red'
         this.checkVertWin()
+        this.checkHorWin()
       } else if (this.$player1turn == false && this.value.y == 5 && this.$board[this.value.x][this.value.y]== ''){
         this.redActive = true;
         this.yellowActive = false;
@@ -49,6 +71,7 @@ export default {
         console.log("red");
         this.$board[this.value.x][this.value.y] = 'yellow'
         this.checkVertWin()
+        this.checkHorWin()
       }
     },
   }
