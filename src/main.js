@@ -13,6 +13,7 @@ Vue.prototype.$board = [
    ['','','','','',''],
    ['','','','','','']
 ]
+Vue.prototype.$winState = false
 
 Vue.component('comp-cell', compcell)
 Vue.component('comp-board', gameboard)
