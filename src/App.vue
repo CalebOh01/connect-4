@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <comp-board></comp-board>
-    <p v-if="$winState">you win</p>
+    <h1 v-if="this.$winState.value">WINNER</h1>
+    <comp-board v-if="this.$winState.value == false"></comp-board>
   </div>
 </template>
 
