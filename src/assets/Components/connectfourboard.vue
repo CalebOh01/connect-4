@@ -4,7 +4,7 @@
         <div v-for="(a,j) in 6" :key="j">
           <comp-cell :value="{
             x: i,
-            y:j
+            y: j
           }"></comp-cell>
         </div>
       </div>
