@@ -16,6 +16,7 @@ export default {
   methods: {
     //Have to refactor the checks to work with both players differently
     checkVertWin() {
+      //refactor this
       if (
         this.value.y <= 2 &&
         this.$board[this.value.x][this.value.y] ==
@@ -74,6 +75,27 @@ export default {
         }
       }
       
+      for (let i = 0; i < 7; i++) {
+        if (this.$board[this.value.x + 3 + i][this.value.y + 3 + i] == null) {
+          return;
+        } else if (
+          this.$board[this.value.x + 3 + i][this.value.y + 3 + i] ==
+          this.streak_value
+        ) {
+          this.streak++;
+          if (this.streak == 4) {
+            console.log("win");
+            this.$winState.state = true;
+            break;
+          }
+        } else {
+          this.streak = 1;
+          if (this.$board[this.value.x + 3 + i][this.value.y + 3 + i] != "") {
+            this.streak_value = this.$board[this.value.x + 3 + i][this.value.y + 3 + i];
+          }
+        }
+      }
+
     },
     myPlay() {
       if (
