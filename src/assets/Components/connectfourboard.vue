@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-      <div v-for="(a,i) in 6" :key="i">
-        <div v-for="(a,j) in 7" :key="j">
+      <div v-for="(a,i) in 7" :key="i">
+        <div v-for="(a,j) in 6" :key="j">
           <comp-cell :value="{
             x: i,
             y:j
