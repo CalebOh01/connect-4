@@ -6,7 +6,6 @@
 export default {
   data() {
     return {
-      isClicked: false,
       redActive: false,
       yellowActive: false,
     };
@@ -16,19 +15,29 @@ export default {
   },
   methods: {
     myPlay() {
-      if (this.$player1turn.value == true && this.isClicked == false && (this.$board[this.value.x][(this.value.y)+1] != '') || this.value.y == 5) {
+      if (this.$player1turn.value == true && this.$board[this.value.x][this.value.y] == '' && this.$board[this.value.x][(this.value.y)+1] != '') {
         this.redActive = true;
         this.yellowActive = false;
-        this.isClicked = true;
         this.$player1turn.value = !this.$player1turn.value;
         console.log("red");
         this.$board[this.value.x][this.value.y] = 'filled'
-      } else if (this.$player1turn.value == false && this.isClicked == false && (this.$board[this.value.x][(this.value.y)+1] != '') || this.value.y == 5){
+      } else if (this.$player1turn.value == false && this.$board[this.value.x][this.value.y] == '' && this.$board[this.value.x][(this.value.y)+1] != ''){
         this.yellowActive = true;
         this.redActive = false;
-        this.isClicked = true;
         this.$player1turn.value = !this.$player1turn.value;
         console.log("yellow");
+        this.$board[this.value.x][this.value.y] = 'filled'
+      } else if (this.$player1turn == true && this.value.y == 5 && this.$board[this.value.x][this.value.y]== '') {
+        this.redActive = true;
+        this.yellowActive = false;
+        this.$player1turn.value = !this.$player1turn.value;
+        console.log("red");
+        this.$board[this.value.x][this.value.y] = 'filled'
+      } else if (this.$player1turn == false && this.value.y == 5 && this.$board[this.value.x][this.value.y]== ''){
+        this.redActive = true;
+        this.yellowActive = false;
+        this.$player1turn.value = !this.$player1turn.value;
+        console.log("red");
         this.$board[this.value.x][this.value.y] = 'filled'
       }
     }
