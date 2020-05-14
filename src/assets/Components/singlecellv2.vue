@@ -12,22 +12,24 @@ export default {
     };
   },
   props: {
-    value: String
+    value: Object
   },
   methods: {
     myPlay() {
-      if (this.$player1turn.value == true && this.isClicked == false) {
+      if (this.$player1turn.value == true && this.isClicked == false && (this.$board[this.value.x][(this.value.y)+1] != '') || this.value.y == 5) {
         this.redActive = true;
         this.yellowActive = false;
         this.isClicked = true;
         this.$player1turn.value = !this.$player1turn.value;
         console.log("red");
-      } else if (this.$player1turn.value == false && this.isClicked == false){
+        this.$board[this.value.x][this.value.y] = 'filled'
+      } else if (this.$player1turn.value == false && this.isClicked == false && (this.$board[this.value.x][(this.value.y)+1] != '') || this.value.y == 5){
         this.yellowActive = true;
         this.redActive = false;
         this.isClicked = true;
         this.$player1turn.value = !this.$player1turn.value;
         console.log("yellow");
+        this.$board[this.value.x][this.value.y] = 'filled'
       }
     }
   }

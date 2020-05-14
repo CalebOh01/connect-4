@@ -2,7 +2,10 @@
     <div class="container">
       <div v-for="(a,i) in 6" :key="i">
         <div v-for="(a,j) in 7" :key="j">
-          <comp-cell :value="$board[i][j]"></comp-cell>
+          <comp-cell :value="{
+            x: i,
+            y:j
+          }"></comp-cell>
         </div>
       </div>
     </div>
