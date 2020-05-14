@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <my-board></my-board>
+    <comp-board></comp-board>
   </div>
 </template>
 
