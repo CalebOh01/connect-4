@@ -21,25 +21,32 @@ export default {
         this.$player1turn.value = !this.$player1turn.value;
         console.log("red");
         this.$board[this.value.x][this.value.y] = 'red'
+        checkWin()
       } else if (this.$player1turn.value == false && this.$board[this.value.x][this.value.y] == '' && this.$board[this.value.x][(this.value.y)+1] != ''){
         this.yellowActive = true;
         this.redActive = false;
         this.$player1turn.value = !this.$player1turn.value;
         console.log("yellow");
         this.$board[this.value.x][this.value.y] = 'yellow'
+        checkWin()
       } else if (this.$player1turn == true && this.value.y == 5 && this.$board[this.value.x][this.value.y]== '') {
         this.redActive = true;
         this.yellowActive = false;
         this.$player1turn.value = !this.$player1turn.value;
         console.log("red");
         this.$board[this.value.x][this.value.y] = 'red'
+        checkWin()
       } else if (this.$player1turn == false && this.value.y == 5 && this.$board[this.value.x][this.value.y]== ''){
         this.redActive = true;
         this.yellowActive = false;
         this.$player1turn.value = !this.$player1turn.value;
         console.log("red");
         this.$board[this.value.x][this.value.y] = 'yellow'
+        checkWin()
       }
+    },
+    checkWin(){
+      console.log("pass")
     }
   }
 };
