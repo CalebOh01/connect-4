@@ -14,9 +14,7 @@ export default {
     value: Object
   },
   methods: {
-    //Have to refactor the checks to work with both players differently
     checkVertWin() {
-      //refactor this
       if (
         this.value.y <= 2 &&
         this.$board[this.value.x][this.value.y] ==
@@ -116,6 +114,11 @@ export default {
         this.redActive = true;
         this.yellowActive = false;
         this.$player1turn.value = !this.$player1turn.value;
+        if(this.$player1turn.value == true) {
+          this.$whoseTheWinner.value = 'yellow'
+        } else {
+          this.$whoseTheWinner.value = 'red'
+        }
         console.log("red");
         this.$board[this.value.x][this.value.y] = "red";
         this.checkVertWin();
@@ -129,6 +132,11 @@ export default {
         this.yellowActive = true;
         this.redActive = false;
         this.$player1turn.value = !this.$player1turn.value;
+        if(this.$player1turn.value == true) {
+          this.$whoseTheWinner.value = 'yellow'
+        } else {
+          this.$whoseTheWinner.value = 'red'
+        }
         console.log("yellow");
         this.$board[this.value.x][this.value.y] = "yellow";
         this.checkVertWin();
@@ -142,6 +150,11 @@ export default {
         this.redActive = true;
         this.yellowActive = false;
         this.$player1turn.value = !this.$player1turn.value;
+        if(this.$player1turn.value == true) {
+          this.$whoseTheWinner.value = 'red'
+        } else {
+          this.$whoseTheWinner.value = 'yellow'
+        }
         console.log("red");
         this.$board[this.value.x][this.value.y] = "red";
         this.checkVertWin();
@@ -155,6 +168,11 @@ export default {
         this.redActive = true;
         this.yellowActive = false;
         this.$player1turn.value = !this.$player1turn.value;
+        if(this.$player1turn.value == true) {
+          this.$whoseTheWinner.value = 'yellow'
+        } else {
+          this.$whoseTheWinner.value = 'red'
+        }
         console.log("red");
         this.$board[this.value.x][this.value.y] = "yellow";
         this.checkVertWin();
