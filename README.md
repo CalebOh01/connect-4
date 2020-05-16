@@ -15,4 +15,6 @@ npm run dev
 npm run build
 ```
 
+In order to run the game, in the terminal type "npm run dev"
+
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
