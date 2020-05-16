@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <h1 v-if="this.status" @update-screen="updateScreen">WINNER</h1>
-    <comp-board v-if="!this.status" @update-screen="updateScreen"></comp-board>
+    <h1 v-if="this.status" @change-screen="updateScreen()">WINNER</h1>
+    <comp-board v-if="!this.status" @change-screen="updateScreen()"></comp-board>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     updateScreen(){
-      this.status = true
+      this.status = !this.status
     }
   }
 }

@@ -5,12 +5,23 @@
           <comp-cell :value="{
             x: i,
             y: j
-          }"></comp-cell>
+          }"
+          @update-screen="updateScreen"
+          ></comp-cell>
         </div>
       </div>
     </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    updateScreen() {
+     this.$emit('change-screen') 
+    }
+  }
+}
+</script>
 
 <style>
 .container {
