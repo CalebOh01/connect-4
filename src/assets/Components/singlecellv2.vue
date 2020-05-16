@@ -26,7 +26,7 @@ export default {
         this.$board[this.value.x][this.value.y] ==
           this.$board[this.value.x][this.value.y + 3]
       ) {
-        this.$winState.state = true;
+        this.$emit('update-screen')
         console.log("win");
       }
     },
@@ -38,7 +38,7 @@ export default {
           this.streak++;
           if (this.streak == 4) {
             console.log("win");
-            this.$winState.state = true;
+            this.$emit('update-screen')
             break;
           }
         } else {
@@ -52,22 +52,22 @@ export default {
     checkDiagWin() {
       let streak = 0;
       let streak_value = "yellow";
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 11; i++) {
         if (
           this.value.y - 5 + i < 0 ||
           this.value.x - 5 + i < 0 ||
-          this.value.y - 5 + i > 6 ||
-          this.value.x - 5 + i > 7
+          this.value.y - 5 + i > 5 ||
+          this.value.x - 5 + i > 6
         ) {
-          break;
+          return;
         } else if (
           this.$board[this.value.x - 5 + i][this.value.y - 5 + i] ==
-          streak_value
+          this.streak_value
         ) {
           this.streak++;
           if (this.streak == 4) {
             console.log("win");
-            this.$winState.state = true;
+            this.$emit('update-screen')
             break;
           } else {
             this.streak = 1;
@@ -79,26 +79,30 @@ export default {
           }
         }
       }
-      this.streak = 0;
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 11; i++) {
         if (
-          this.value.x + 5 - i > 7 ||
+          this.value.x + 5 - i > 6 ||
           this.value.x + 5 - i < 0 ||
           this.value.y - 5 + i < 0 ||
-          this.value.y - 5 + i > 6
+          this.value.y - 5 + i > 5
         ) {
-          break;
-        } else if (this.$board[this.value.x + 5 - i][this.value.y - 5 + i] == this.streak_value) {
-          this.streak++
-          if(this.streak == 4){
+          return;
+        } else if (
+          this.$board[this.value.x + 5 - i][this.value.y - 5 + i] ==
+          this.streak_value
+        ) {
+          this.streak++;
+          if (this.streak == 4) {
             console.log("win");
-            this.$winState.state = true;
+            this.$emit('update-screen')
             break;
           }
         } else {
           this.streak = 1;
-          if(this.$board[this.value.x + 5 - i][this.value.y - 5 + i] != ""){
-            this.streak_value = this.$board[this.value.x + 5 - i][this.value.y - 5 + i]
+          if (this.$board[this.value.x + 5 - i][this.value.y - 5 + i] != "") {
+            this.streak_value = this.$board[this.value.x + 5 - i][
+              this.value.y - 5 + i
+            ];
           }
         }
       }
