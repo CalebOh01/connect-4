@@ -14,6 +14,27 @@ export default {
     value: Object
   },
   methods: {
+    checkWin() {
+      this.checkVertWin();
+      this.checkHorWin();
+      this.checkDiagWin();
+    },
+    myClick(value) {
+      if (value == "red") {
+        this.redActive = true;
+      } else {
+        this.yellowActive = false;
+      }
+      this.$player1turn.value = !this.$player1turn.value;
+      if (this.$player1turn.value == true) {
+        this.$whoseTheWinner.value = "red";
+      } else {
+        this.$whoseTheWinner.value = "yellow";
+      }
+      console.log(value);
+      this.$board[this.value.x][this.value.y] = value;
+      this.checkWin();
+    },
     checkVertWin() {
       if (
         this.value.y <= 2 &&
@@ -24,7 +45,7 @@ export default {
         this.$board[this.value.x][this.value.y] ==
           this.$board[this.value.x][this.value.y + 3]
       ) {
-        this.$emit('update-screen')
+        this.$emit("update-screen");
         console.log("win");
       }
     },
@@ -36,7 +57,7 @@ export default {
           this.streak++;
           if (this.streak == 4) {
             console.log("win");
-            this.$emit('update-screen')
+            this.$emit("update-screen");
             break;
           }
         } else {
@@ -58,14 +79,15 @@ export default {
           this.value.x - 5 + i > 6
         ) {
           return;
-        } else if (
+        }
+        if (
           this.$board[this.value.x - 5 + i][this.value.y - 5 + i] ==
           this.streak_value
         ) {
           this.streak++;
           if (this.streak == 4) {
             console.log("win");
-            this.$emit('update-screen')
+            this.$emit("update-screen");
             break;
           } else {
             this.streak = 1;
@@ -85,14 +107,15 @@ export default {
           this.value.y - 5 + i > 5
         ) {
           return;
-        } else if (
+        }
+        if (
           this.$board[this.value.x + 5 - i][this.value.y - 5 + i] ==
           this.streak_value
         ) {
           this.streak++;
           if (this.streak == 4) {
             console.log("win");
-            this.$emit('update-screen')
+            this.$emit("update-screen");
             break;
           }
         } else {
@@ -111,73 +134,25 @@ export default {
         this.$board[this.value.x][this.value.y] == "" &&
         this.$board[this.value.x][this.value.y + 1] != ""
       ) {
-        this.redActive = true;
-        this.yellowActive = false;
-        this.$player1turn.value = !this.$player1turn.value;
-        if(this.$player1turn.value == true) {
-          this.$whoseTheWinner.value = 'yellow'
-        } else {
-          this.$whoseTheWinner.value = 'red'
-        }
-        console.log("red");
-        this.$board[this.value.x][this.value.y] = "red";
-        this.checkVertWin();
-        this.checkHorWin();
-        this.checkDiagWin();
+        this.myClick('red')
       } else if (
         this.$player1turn.value == false &&
         this.$board[this.value.x][this.value.y] == "" &&
         this.$board[this.value.x][this.value.y + 1] != ""
       ) {
-        this.yellowActive = true;
-        this.redActive = false;
-        this.$player1turn.value = !this.$player1turn.value;
-        if(this.$player1turn.value == true) {
-          this.$whoseTheWinner.value = 'yellow'
-        } else {
-          this.$whoseTheWinner.value = 'red'
-        }
-        console.log("yellow");
-        this.$board[this.value.x][this.value.y] = "yellow";
-        this.checkVertWin();
-        this.checkHorWin();
-        this.checkDiagWin();
+        this.myClick('yellow')
       } else if (
         this.$player1turn == true &&
         this.value.y == 5 &&
         this.$board[this.value.x][this.value.y] == ""
       ) {
-        this.redActive = true;
-        this.yellowActive = false;
-        this.$player1turn.value = !this.$player1turn.value;
-        if(this.$player1turn.value == true) {
-          this.$whoseTheWinner.value = 'red'
-        } else {
-          this.$whoseTheWinner.value = 'yellow'
-        }
-        console.log("red");
-        this.$board[this.value.x][this.value.y] = "red";
-        this.checkVertWin();
-        this.checkHorWin();
-        this.checkDiagWin();
+        this.myClick('red')
       } else if (
         this.$player1turn == false &&
         this.value.y == 5 &&
         this.$board[this.value.x][this.value.y] == ""
       ) {
-        this.redActive = true;
-        this.yellowActive = false;
-        this.$player1turn.value = !this.$player1turn.value;
-        if(this.$player1turn.value == true) {
-          this.$whoseTheWinner.value = 'yellow'
-        } else {
-          this.$whoseTheWinner.value = 'red'
-        }
-        console.log("red");
-        this.$board[this.value.x][this.value.y] = "yellow";
-        this.checkVertWin();
-        this.checkHorWin();
-        this.checkDiagWin();
+        this.myClick('yellow')
       }
     }
   }
