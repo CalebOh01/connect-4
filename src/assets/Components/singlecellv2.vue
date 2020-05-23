@@ -21,6 +21,7 @@ export default {
       this.checkDiagWin2();
     },
     myClick(value) {
+      console.log(this.$board)
       if (value == "red") {
         this.redActive = true;
         this.yellowActive = false;
@@ -49,7 +50,7 @@ export default {
           this.$board[this.value.x][this.value.y + 3]
       ) {
         this.$emit("update-screen");
-        console.log("win");
+        console.log("win vert");
       }
     },
     checkHorWin() {
@@ -59,7 +60,7 @@ export default {
         if (this.$board[i][this.value.y] == this.streak_value) {
           this.streak++;
           if (this.streak == 4) {
-            console.log("win");
+            console.log("win hor");
             this.$emit("update-screen");
             break;
           }
@@ -72,118 +73,51 @@ export default {
       }
     },
     checkDiagWin1() {
-      //   let streak = 0;
-      //   let streak_value = "yellow";
-      //   for (let i = 0; i < 11; i++) {
-      //     if (
-      //       this.value.y - 5 + i < 0 ||
-      //       this.value.x - 5 + i < 0 ||
-      //       this.value.y - 5 + i > 5 ||
-      //       this.value.x - 5 + i > 6
-      //     ) {
-      //       return;
-      //     }
-      //     if (
-      //       this.$board[this.value.x - 5 + i][this.value.y - 5 + i] ==
-      //       this.streak_value
-      //     ) {
-      //       this.streak++;
-      //       if (this.streak == 4) {
-      //         console.log("win");
-      //         this.$emit("update-screen");
-      //         break;
-      //       } else {
-      //         this.streak = 1;
-      //         if (this.$board[this.value.x - 5 + i][this.value.y - 5 + i] != "") {
-      //           this.streak_value = this.$board[this.value.x - 5 + i][
-      //             this.value.y - 5 + i
-      //           ];
-      //         }
-      //       }
-      //     }
-      //   }
-      //   for (let i = 0; i < 11; i++) {
-      //     this.streak = 0
-      //     if (
-      //       this.value.x + 5 - i > 6 ||
-      //       this.value.x + 5 - i < 0 ||
-      //       this.value.y - 5 + i < 0 ||
-      //       this.value.y - 5 + i > 5
-      //     ) {
-      //       return;
-      //     }
-      //     if (
-      //       this.$board[this.value.x + 5 - i][this.value.y - 5 + i] ==
-      //       this.streak_value
-      //     ) {
-      //       this.streak++;
-      //       if (this.streak == 4) {
-      //         console.log("win");
-      //         this.$emit("update-screen");
-      //         break;
-      //       }
-      //     } else {
-      //       this.streak = 1;
-      //       if (this.$board[this.value.x + 5 - i][this.value.y - 5 + i] != "") {
-      //         this.streak_value = this.$board[this.value.x + 5 - i][
-      //           this.value.y - 5 + i
-      //         ];
-      //       }
-      //     }
-      //   }
-      let running_total = 0;
+      let streak = 0;
       let streak_value = "yellow";
-      let x_pos = this.value.x - 5;
-      let y_pos = this.value.y - 5;
       for (let i = 0; i < 12; i++) {
-        this.x_pos = this.x_pos + i;
-        this.y_pos = this.y_pos + i;
         if (
-          this.x_pos < 0 ||
-          this.x_pos > 6 ||
-          this.y_pos < 0 ||
-          this.y_pos > 5
+          this.value.x - 5 + i < 0 ||
+          this.value.x - 5 + i > 6 ||
+          this.value.y - 5 + i < 0 ||
+          this.value.y - 5 + i > 5
         ) {
-          this.running_total = 1;
-        } else if (this.$board[this.x_pos][this.y_pos] == this.streak_value) {
-          this.running_total++;
-          if (this.running_total == 4) {
-            console.log("win");
+          this.streak = 1;
+        } else if (this.$board[this.value.x - 5 + i][this.value.y - 5 + i] == this.streak_value) {
+          this.streak++;
+          if (this.streak == 5) {
+            console.log("win diag1");
             this.$emit("update-screen");
           }
         } else {
-          this.running_total = 1;
-          if (this.$board[this.x_pos][this.y_pos] != "") {
-            this.streak_value = this.$board[this.x_pos][this.y_pos];
+          this.streak = 1;
+          if (this.$board[this.value.x - 5 + i][this.value.y - 5 + i] != "") {
+            this.streak_value = this.$board[this.value.x - 5 + i][this.value.y - 5 + i];
           }
         }
       }
     },
     checkDiagWin2() {
-      let running_total = 0;
+      let streak = 0;
       let streak_value = "yellow";
-      let x_pos = this.value.x + 5;
-      let y_pos = this.value.y - 5;
       for (let i = 0; i < 11; i++) {
-        this.x_pos = this.x_pos - i;
-        this.y_Pos = this.y_pos + i;
         if (
-          this.x_pos < 0 ||
-          this.x_pos > 6 ||
-          this.y_pos < 0 ||
-          this.y_pos > 5
+          this.value.x + 5 - i < 0 ||
+          this.value.x + 5 - i > 6 ||
+          this.value.y - 5 + i < 0 ||
+          this.value.y - 5 + i > 5
         ) {
-          this.running_total = 1;
-        } else if (this.$board[this.x_pos][this.y_pos] == this.streak_value) {
-          this.running_total++;
-          if (this.running_total == 4) {
-            console.log("win");
+          this.streak = 1;
+        } else if (this.$board[this.value.x + 5 - i][this.value.y - 5 + i] == this.streak_value) {
+          this.streak++;
+          if (this.streak == 5) {
+            console.log("win diag2");
             this.$emit("update-screen");
           }
         } else {
-          this.running_total = 1;
-          if(this.$board[this.x_pos][this.y_pos] != "") {
-            this.streak_value = this.$board[this.x_pos][this.y_pos];
+          this.streak = 1;
+          if(this.$board[this.value.x + 5 - i][this.value.y - 5 + i] != "") {
+            this.streak_value = this.$board[this.value.x + 5 - i][this.value.y - 5 + i];
           }
         }
       }

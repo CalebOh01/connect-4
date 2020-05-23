@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import compcell from './assets/Components/singlecellv2.vue'
 import gameboard from './assets/Components/connectfourboard.vue'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 Vue.prototype.$player1turn = { value: true }
 Vue.prototype.$whoseTheWinner = { value: 'red' }
