@@ -9,7 +9,20 @@
         <button @click="resetGame()">Play Again</button>
       </div>
     </div>
-    <comp-board v-if="!this.status" @change-screen="updateScreen()"></comp-board>
+    <div v-if="this.homeScreenOn">
+      <div class="contain">
+        <h1>
+          <span>Two Player</span> Connect Four
+        </h1>
+        <button @click="startGame()">Play the Game</button>
+      </div>
+    </div>
+    <div v-if="!this.homeScreenOn">
+      <div v-if="!this.status" class="row">
+        <h1>Connect 4</h1>
+      </div>
+      <comp-board v-if="!this.status" @change-screen="updateScreen()"></comp-board>
+    </div>
   </div>
 </template>
 
@@ -17,7 +30,8 @@
 export default {
   data() {
     return {
-      status: false
+      status: false,
+      homeScreenOn: true
     };
   },
   methods: {
@@ -32,6 +46,9 @@ export default {
       }
       this.status = !this.status;
       console.log(this.$board);
+    },
+    startGame() {
+      this.homeScreenOn = false;
     }
   }
 };
@@ -39,7 +56,7 @@ export default {
 
 <style>
 .contain {
-  padding-top: 300px;
+  padding-top: 250px;
   text-align: center;
   font-family: "Roboto", sans-serif;
 }
@@ -62,5 +79,11 @@ button {
 }
 span {
   font-style: italic;
+}
+
+.row h1 {
+  padding: 20px;
+  text-align: center;
+  display: inline-block;
 }
 </style>
