@@ -19,6 +19,7 @@ export default {
       this.checkHorWin();
       this.checkDiagWin1();
       this.checkDiagWin2();
+      this.draw();
     },
     myClick(value) {
       console.log(this.$board)
@@ -119,6 +120,22 @@ export default {
           if(this.$board[this.value.x + 5 - i][this.value.y - 5 + i] != "") {
             this.streak_value = this.$board[this.value.x + 5 - i][this.value.y - 5 + i];
           }
+        }
+      }
+    },
+    draw () {
+      let draw_streak = 0
+      for(let i = 0; i<this.$board.length; i++){
+        for(let j = 0; j<this.$board[i].length; i++){
+          if(this.$board[i][j] != ''){
+            this.draw_streak++;
+            if(this.draw_streak == 42){
+              this.$whoseTheWinner.value = 'NO ONE';
+            }
+          } else{
+            this.draw_streak = 0;
+            break;
+          } 
         }
       }
     },

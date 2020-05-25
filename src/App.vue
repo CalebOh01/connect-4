@@ -56,7 +56,7 @@ export default {
 
 <style>
 .contain {
-  padding-top: 250px;
+  padding-top: 350px;
   text-align: center;
   font-family: "Roboto", sans-serif;
 }
