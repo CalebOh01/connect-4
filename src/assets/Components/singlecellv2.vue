@@ -14,15 +14,8 @@ export default {
     value: Object
   },
   methods: {
-    checkWin() {
-      this.checkVertWin();
-      this.checkHorWin();
-      this.checkDiagWin1();
-      this.checkDiagWin2();
-      this.draw();
-    },
     myClick(value) {
-      console.log(this.$board)
+      console.log(this.$board);
       if (value == "red") {
         this.redActive = true;
         this.yellowActive = false;
@@ -38,7 +31,58 @@ export default {
       }
       console.log(value);
       this.$board[this.value.x][this.value.y] = value;
-      this.checkWin();
+      this.checkVertWin();
+      this.checkHorWin();
+      this.checkDiagWin1();
+      this.checkDiagWin2();
+      this.checkDraw();
+    },
+
+    checkDraw() {
+      let draw_streak = 0;
+      for (let i = 0; i < this.$board.length; i++) {
+        for (let j = 0; j < this.$board[i].length; i++) {
+          if (this.$board[i][j] != "") {
+            this.draw_streak++;
+            if (this.draw_streak == 42) {
+              this.$whoseTheWinner.value = "NO ONE";
+            }
+          } else {
+            this.draw_streak = 0;
+            break;
+          }
+        }
+      }
+    },
+    checkDiagWin1() {
+      let streak = 0;
+      let streak_value = "yellow";
+      for (let i = 0; i < 12; i++) {
+        if (
+          this.value.x - 5 + i < 0 ||
+          this.value.x - 5 + i > 6 ||
+          this.value.y - 5 + i < 0 ||
+          this.value.y - 5 + i > 5
+        ) {
+          this.streak = 1;
+        } else if (
+          this.$board[this.value.x - 5 + i][this.value.y - 5 + i] ==
+          this.streak_value
+        ) {
+          this.streak++;
+          if (this.streak == 5) {
+            console.log("win diag1");
+            this.$emit("update-screen");
+          }
+        } else {
+          this.streak = 1;
+          if (this.$board[this.value.x - 5 + i][this.value.y - 5 + i] != "") {
+            this.streak_value = this.$board[this.value.x - 5 + i][
+              this.value.y - 5 + i
+            ];
+          }
+        }
+      }
     },
     checkVertWin() {
       if (
@@ -73,31 +117,6 @@ export default {
         }
       }
     },
-    checkDiagWin1() {
-      let streak = 0;
-      let streak_value = "yellow";
-      for (let i = 0; i < 12; i++) {
-        if (
-          this.value.x - 5 + i < 0 ||
-          this.value.x - 5 + i > 6 ||
-          this.value.y - 5 + i < 0 ||
-          this.value.y - 5 + i > 5
-        ) {
-          this.streak = 1;
-        } else if (this.$board[this.value.x - 5 + i][this.value.y - 5 + i] == this.streak_value) {
-          this.streak++;
-          if (this.streak == 5) {
-            console.log("win diag1");
-            this.$emit("update-screen");
-          }
-        } else {
-          this.streak = 1;
-          if (this.$board[this.value.x - 5 + i][this.value.y - 5 + i] != "") {
-            this.streak_value = this.$board[this.value.x - 5 + i][this.value.y - 5 + i];
-          }
-        }
-      }
-    },
     checkDiagWin2() {
       let streak = 0;
       let streak_value = "yellow";
@@ -109,7 +128,10 @@ export default {
           this.value.y - 5 + i > 5
         ) {
           this.streak = 1;
-        } else if (this.$board[this.value.x + 5 - i][this.value.y - 5 + i] == this.streak_value) {
+        } else if (
+          this.$board[this.value.x + 5 - i][this.value.y - 5 + i] ==
+          this.streak_value
+        ) {
           this.streak++;
           if (this.streak == 5) {
             console.log("win diag2");
@@ -117,25 +139,11 @@ export default {
           }
         } else {
           this.streak = 1;
-          if(this.$board[this.value.x + 5 - i][this.value.y - 5 + i] != "") {
-            this.streak_value = this.$board[this.value.x + 5 - i][this.value.y - 5 + i];
+          if (this.$board[this.value.x + 5 - i][this.value.y - 5 + i] != "") {
+            this.streak_value = this.$board[this.value.x + 5 - i][
+              this.value.y - 5 + i
+            ];
           }
-        }
-      }
-    },
-    draw () {
-      let draw_streak = 0
-      for(let i = 0; i<this.$board.length; i++){
-        for(let j = 0; j<this.$board[i].length; i++){
-          if(this.$board[i][j] != ''){
-            this.draw_streak++;
-            if(this.draw_streak == 42){
-              this.$whoseTheWinner.value = 'NO ONE';
-            }
-          } else{
-            this.draw_streak = 0;
-            break;
-          } 
         }
       }
     },
